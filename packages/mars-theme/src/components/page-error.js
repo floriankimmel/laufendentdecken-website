@@ -23,6 +23,7 @@ const Page404 = ({ state }) => {
 
   const title = "Oops! Something went wrong";
   const title404 = "Oops! 404";
+    console.dir(data)
 
   return (
     <Container>

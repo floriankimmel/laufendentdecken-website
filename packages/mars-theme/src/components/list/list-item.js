@@ -15,47 +15,35 @@ const Item = ({ state, item }) => {
   const date = new Date(item.date);
 
   return (
-    <article>
+    <PodcastEpisode>
+            
+      {state.theme.featured.showOnList && (
+        <FeaturedMedia id={item.featured_media} />
+      )}
+
       <Link link={item.link}>
         <Title dangerouslySetInnerHTML={{ __html: item.title.rendered }} />
       </Link>
 
       <div>
-        {/* If the post has an author, we render a clickable author text. */}
-        {author && (
-          <StyledLink link={author.link}>
-            <AuthorName>
-              By <b>{author.name}</b>
-            </AuthorName>
-          </StyledLink>
-        )}
         <PublishDate>
           {" "}
-          on <b>{date.toDateString()}</b>
+          Veröffentlich am <b>{date.toDateString()}</b>
         </PublishDate>
       </div>
-
-      {/*
-       * If the want to show featured media in the
-       * list of featured posts, we render the media.
-       */}
-      {state.theme.featured.showOnList && (
-        <FeaturedMedia id={item.featured_media} />
-      )}
-
-      {/* If the post has an excerpt (short summary text), we render it */}
-      {item.excerpt && (
-        <Excerpt dangerouslySetInnerHTML={{ __html: item.excerpt.rendered }} />
-      )}
-    </article>
+    </PodcastEpisode>
   );
 };
 
 // Connect the Item to gain access to `state` as a prop
 export default connect(Item);
 
+const PodcastEpisode = styled.div`
+    flex: 1 0 21%; /* explanation below */
+    margin: 5px;
+`;
 const Title = styled.h1`
-  font-size: 2rem;
+  font-size: 1.5rem;
   color: rgba(12, 17, 43);
   margin: 0;
   padding-top: 24px;

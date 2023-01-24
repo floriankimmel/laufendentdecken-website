@@ -23,12 +23,14 @@ const List = ({ state }) => {
         </Header>
       )}
 
-      {/* Iterate over the items of the list. */}
-      {data.items.map(({ type, id }) => {
-        const item = state.source[type][id];
-        // Render one Item component for each one.
-        return <Item key={item.id} item={item} />;
-      })}
+      <PodcastEpisodes>      
+                {/* Iterate over the items of the list. */}
+                {data.items.map(({ type, id }) => {
+                    const item = state.source[type][id];
+                    // Render one Item component for each one.
+                    return <Item key={item.id} item={item} />;
+                })}
+      </PodcastEpisodes>
       <Pagination />
     </Container>
   );
@@ -36,8 +38,12 @@ const List = ({ state }) => {
 
 export default connect(List);
 
+const PodcastEpisodes = styled.div`
+    display: flex;
+    flex-wrap: wrap;
+`;
 const Container = styled.section`
-  width: 800px;
+  width: 100%;
   margin: 0;
   padding: 24px;
   list-style: none;
